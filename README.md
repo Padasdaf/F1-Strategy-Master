@@ -1,1 +1,2 @@
-# F1-Strategy-Master
+# F1 Strategy Master
+F1 Strategy Master is a web application that allows users to explore historical Formula 1 race data and simulate race strategies by selecting various parameters, such as tire choices, stint lengths, weather conditions, and tracks. The application features a dynamic form that adjusts based on the number of pit stops, offering tailored options for each stint. Users can choose from a comprehensive list of F1 tracks to simulate races, with the simulation providing a predicted finishing position. 
