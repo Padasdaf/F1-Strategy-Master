@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Strategy Master</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="container">
+    <img src="/images/logo.png" alt="F1 Strategy Master" class="logo">
+    <h1 class="text-center">F1 Strategy Master</h1>
+    <h2 class="text-center">Select a Year and Race</h2>
+    
+    <div class="row">
+        <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3">
+            <div class="form-group">
+                <label for="year-select">Year:</label>
+                <select id="year-select" class="form-control">
+                    <option value="" disabled selected>Select Year</option>
+                    <% years.forEach(year => { %>
+                        <option value="<%= year.year %>"><%= year.year %></option>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="list-group" id="race-list"></div>
+        </div>
+    </div>
+
+    <div id="race-details" class="mt-4"></div>
+
+    <a href="/simulate" class="btn btn-primary mt-5">Simulate a Race</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/scripts.js"></script>
+</body>
+</html>

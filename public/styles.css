@@ -1,0 +1,140 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('/images/background.jpg');
+    background-size: contain; /* Make the background smaller */
+    background-repeat: no-repeat;
+    background-position: center; /* Center the background */
+    color: #ffffff;
+    text-align: center; /* Center text elements by default */
+}
+
+h1, h2 {
+    color: #ffffff;
+    text-shadow: 2px 2px 5px #000000;
+    margin-top: 20px;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center; /* Center container contents */
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 20px; /* Center the logo with margin below it */
+    max-width: 200px; /* Adjust the logo size */
+}
+
+.table {
+    margin-top: 20px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-group label {
+    color: #ffffff;
+}
+
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.form-control::placeholder {
+    color: #dcdcdc;
+}
+
+.btn-primary, .btn-secondary {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    width: fit-content;
+    margin: 20px auto; /* Center the button */
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    margin: 20px auto;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 10px 0;
+    background-color: #343a40;
+    color: white;
+}
+
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Responsive media queries */
+@media (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .btn-primary, .btn-secondary {
+        font-size: 1rem;
+    }
+
+    .table th, .table td {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 576px) {
+    h1, h2 {
+        font-size: 1.25rem;
+    }
+
+    .btn-primary, .btn-secondary {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .form-group label {
+        font-size: 0.875rem;
+    }
+
+    .form-control {
+        font-size: 0.875rem;
+    }
+}
