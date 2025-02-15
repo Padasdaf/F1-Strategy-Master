@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
 const path = require('path');
+const simulationEngine = require('./simulationEngine');
 const app = express();
 
 const pool = new Pool({
@@ -57,34 +58,47 @@ app.get('/simulate', (req, res) => {
 });
 
 app.post('/simulate', (req, res) => {
-    const { grid, laps, tire_choice_stint_1, tire_choice_stint_2, tire_choice_stint_3, stint_length, pit_stop_times, track, weather, time_of_day } = req.body;
+    // Parse simulation inputs from the request.
+    const grid = parseInt(req.body.grid);
+    const laps = parseInt(req.body.laps); // Laps can be used for further enhancements if needed.
+    const pitStops = parseInt(req.body.pit_stop_times);
+    const track = req.body.track;
+    const weather = req.body.weather;
+    const timeOfDay = req.body.time_of_day;
 
-    const inputData = {
-        grid: parseInt(grid),
-        laps: parseInt(laps),
-        tire_choice_stint_1: tire_choice_stint_1,
-        tire_choice_stint_2: tire_choice_stint_2,
-        tire_choice_stint_3: tire_choice_stint_3,
-        stint_length: parseInt(stint_length),
-        pit_stop_times: parseInt(pit_stop_times),
-        track: track,
+    // Gather dynamic stint data (pit stops + 1 stints).
+    let stints = [];
+    for (let i = 1; i <= pitStops + 1; i++) {
+        let tire = req.body[`tire_choice_stint_${i}`];
+        let stint_length = parseInt(req.body[`stint_length_${i}`]);
+        stints.push({ tire, stint_length });
+    }
+
+    // Prepare parameters and invoke the simulation engine.
+    const params = {
+        grid: grid,
+        pitStops: pitStops,
+        stints: stints,
         weather: weather,
-        time_of_day: time_of_day
+        track: track,
+        timeOfDay: timeOfDay
     };
 
-    const predictedPosition = Math.random() > 0.5 ? "Top 10" : "Not in Top 10";
+    const simulationResult = simulationEngine.simulateRaceOutcome(params);
 
+    // Log the simulation breakdown for debugging.
+    console.log("Simulation Breakdown:", simulationResult.breakdown);
+
+    // Return the simulation outcome with detailed breakdown.
     res.json({
         outcome: {
-            position: predictedPosition,
-            tire_choice_stint_1: tire_choice_stint_1,
-            tire_choice_stint_2: tire_choice_stint_2,
-            tire_choice_stint_3: tire_choice_stint_3,
-            stint_length: stint_length,
-            pit_stop_times: pit_stop_times,
+            predictedPosition: simulationResult.predictedPosition,
+            top10: simulationResult.top10,
+            breakdown: simulationResult.breakdown,
+            stints: stints,
             track: track,
             weather: weather,
-            time_of_day: time_of_day
+            time_of_day: timeOfDay
         }
     });
 });
